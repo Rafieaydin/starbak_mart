@@ -1,0 +1,214 @@
+<!doctype html>
+<hr lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+
+    <style>
+        .container {
+            width: 800px;
+        }
+    </style>
+</head>
+ 
+<body>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col mt-1">
+
+                <input type="text" placeholder="Satuan kilogram" id="a" oninput="nilaiChange(this.value)">
+            </div>
+            <div class="col">
+                <select class="form-control bg-secondary text-white" id="pilih" onchange="perubahan(this.value)">
+                    <option value="kilometer">kilometer</option>
+                    <option value="hekameter" selected>hekameter</option>
+                    <option value="dekamater">dekamater</option>
+                    <option value="gram">gram</option>
+                </select>
+            </div>
+            <div class="col mt-1">
+                <input type="text" placeholder="Satuan kilogram" id="b" oninput="nilaiChange(this.value)">
+            </div>
+            <div class="col">
+                <select class="form-control bg-secondary text-white" id="perubahan" onchange="perubahan2(this.value)">
+                    <option value="kilometer">kilometer</option>
+                    <option value="hekameter" selected>hekameter</option>
+                    <option value="dekamater">dekamater</option>
+                    <option value="gram">gram</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- this.value maksudnya itu kasih parameter/(nilai) value dari yang dipilih di sini -->
+    <!-- kenapa Id(a) dan Id(b) punya function yang sama karena dia pakai if else jadi panjang -->
+    <script>
+        // kalo mau yang utama dari perubahnya dari sini
+
+        // menggunakan nested object soalnya biar simpel
+        var kilo = {
+            kiloBydekamater: { // merubah dari jam ke nilai yang ada di object
+                kilometer : function (nilai) {
+                    return Number(nilai) / 100
+                },
+                hekameter : function (nilai) {
+                    return Number(nilai) / 10
+                },
+                gram : function (nilai) {
+                    return Number(nilai) * 10
+                }
+            },
+            kiloByhekameter : { // merubah dari menit ke nilai yang ada di object
+                kilometer : function (nilai) {
+                    return Number(nilai) / 10
+                },
+                dekamater : function (nilai) {
+                    return Number(nilai) * 10
+                },
+                gram: function (nilai) {
+                    return Number(nilai) * 100
+                }
+            },
+            kiloBykilometer: { // merubah dari detik ke nilai yang ada di object
+                hekameter : function (nilai) {
+                    return Number(nilai) * 10
+                },
+                dekamater : function (nilai) {
+                    return Number(nilai) * 100
+                },
+                gram: function (nilai) {
+                    return Number(nilai) * 1000
+                }
+            },
+            kiloBygram : {
+                kilometer : function (nilai) {
+                    return Number(nilai) / 10
+                },
+                hekameter : function (nilai) {
+                    return Number(nilai) / 100
+                },
+                dekamater : function (nilai) {
+                    return Number(nilai) / 1000
+                }
+            }  
+        }    
+        
+
+        var perubahan_akhir = document.getElementById("perubahan")
+        var pilih = document.getElementById("pilih")
+        var nilai_awal = document.getElementById("a")
+        var nilai_akhir = document.getElementById("b")
+
+        function nilaiChange(a) {
+            // a maksudnya itu parameter dapet dari this.value
+
+            // ini buat check kalo this.value / a itu nilanya sama kaya id(a)
+            if (a == nilai_awal.value) {
+                // ini buat var pilih itu jam dan var perubahan_akhir = detik
+                // ini panjang karena check satu-satu nilai variable nya
+                if (pilih.value == "dekamater" && perubahan_akhir.value == "kilometer") {
+                    // ini buat ubah nilai id(b) ke object nested // cara panggilnya (object.object.namafungsi(parameter))
+                    nilai_akhir.value = kilo.kiloBydekamater.kilometer(a)
+                } else if (pilih.value == "dekamater" && perubahan_akhir.value == "hekameter") {
+                    nilai_akhir.value = kilo.kiloBydekamater.hekameter(a)
+                } else if (pilih.value == "hekameter" && perubahan_akhir.value == "dekamater") {
+                    nilai_akhir.value = kilo.kiloByhekameter.dekamater(a)
+                } else if (pilih.value == "hekameter" && perubahan_akhir.value == "kilometer") {
+                    nilai_akhir.value = kilo.kiloByhekameter.kilometer(a)
+                } else if (pilih.value == "kilometer" && perubahan_akhir.value == "dekamater") {
+                    nilai_akhir.value = kilo.kiloBykilometer.dekamater(a)
+                } else if (pilih.value == "kilometer" && perubahan_akhir.value == "hekameter") {
+                    nilai_akhir.value = kilo.kiloBykilometer.hekameter(a)
+                } else if (pilih.value == "dekamater" && perubahan_akhir.value == "gram") {
+                    nilai_akhir.value = kilo.kiloBydekamater.gram(a)
+                } else if (pilih.value == "kilometer" && perubahan_akhir.value == "gram") {
+                    nilai_akhir.value = kilo.kiloBykilometer.gram(a)
+                } else if (pilih.value == "hekameter" && perubahan_akhir.value == "gram") {
+                    nilai_akhir.value = kilo.kiloByhekameter.gram(a)
+                } else if (pilih.value == "gram" && perubahan_akhir.value == "kilometer") {
+                    nilai_akhir.value = kilo.kiloBygram.kilometer(a)
+                } else if (pilih.value == "gram" && perubahan_akhir.value == "hekameter") {
+                    nilai_akhir.value = kilo.kiloBygram.hekameter(a)
+                } else if (pilih.value == "gram" && perubahan_akhir.value == "dekamater") {
+                    nilai_akhir.value = kilo.kiloBygram.dekamater(a)
+                }   
+            
+
+            } else if (a == nilai_akhir.value) { // ini buat check kalo this.value / a itu nilanya sama kaya id(b)
+                // ini buat var pilih itu jam dan var perubahan_akhir = detik
+                // ini panjang karena check satu-satu nilai variable nya
+                if (perubahan_akhir.value == "dekamater" && pilih.value == "kilometer") {
+                    // ini buat ubah nilai id(a) ke object nested // cara panggilnya (object.object.namafungsi(parameter))
+                    nilai_awal.value = kilo.kiloBydekamater.kilometer(a)
+                } else if (perubahan_akhir.value == "kilometer" && pilih.value == "hekameter") {
+                    nilai_awal.value = kilo.kiloBydekamater.hekameter(a)
+                } else if (perubahan_akhir.value == "hekameter" && pilih.value == "dekamater") {
+                    nilai_awal.value = kilo.kiloByhekameter.dekamater(a)
+                } else if (perubahan_akhir.value == "hekameter" && pilih.value == "kilometer") {
+                    nilai_awal.value = kilo.kiloByhekameter.kilometer(a)
+                } else if (perubahan_akhir.value == "kilometer" && pilih.value == "dekameter") {
+                    nilai_awal.value = kilo.kiloBykilometer.dekamater(a)
+                } else if (perubahan_akhir.value == "kilometer" && pilih.value == "dekameter") {
+                    nilai_awal.value = kilo.kiloBykilometer.hekameter(a)
+                } else if (perubahan_akhir.value == "kilometer" && pilih.value == "gram") {
+                    nilai_awal.value = kilo.kiloBykilometer.gram(a)
+                }
+            }
+        }
+        // sampai sini yang kebawah itu tambahan biar kalo pilih yang sama bisa berubah nilainya
+
+        // ini function buat pilihan pertama
+        function perubahan(pilihan) {
+            if (pilihan == "dekamater" && perubahan_akhir.value == "dekamater") {
+                perubahan_akhir.value = "kilometer"
+            } else if (pilihan == "hekameter" && perubahan_akhir.value == "hekameter") {
+                perubahan_akhir.value = "gram"
+            } else if (pilihan == "kilometer" && perubahan_akhir.value == "kilometer") {
+                perubahan_akhir.value = "hekameter"
+            } else if (pilihan == "gram" && perubahan_akhir.value == "gram") {
+                perubahan_akhir.value = "dekamater"
+            // ini buat refresh nilianya setelah dirubah opsinya
+            nilaiChange(nilai_awal.value)
+
+        }
+
+        // ini function buat pilihan kedua
+        function perubahan2(pilihan) {
+            if (pilihan == "dekamater" && pilih.value == "dekamater") {
+                pilih.value = "kilometer"
+            } else if (pilihan == "hekameter" && pilih.value == "hekameter") {
+                pilih.value = "dekamater"
+            } else if (pilihan == "kilometer" && pilih.value == "kilometer") {
+                pilih.value = "hekameter"
+            } else if (pilihan == "gram" && pilih.value == "gram") {
+                pilih.value = "kilometer"
+            // ini buat refresh nilianya setelah dirubah opsinya
+            nilaiChange(nilai_akhir.value)
+        }
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
