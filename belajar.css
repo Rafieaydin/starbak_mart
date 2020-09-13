@@ -1,0 +1,88 @@
+.container {
+    width: 450px;
+    margin-top: 80px;
+    border-radius: 5px;
+    border-collapse: black;
+    border-style: solid;
+    font-family: 'Grandstander', cursive;
+}
+
+/* isi */
+.kode_pro {
+    width: 240px;
+    background-color: white;
+    border: #e74c3c;
+}
+
+.harga {
+    width: 120px;
+}
+
+.dropdown {
+    margin-left: 70px;
+}
+
+.dropdown {
+    width: 200px;
+    text-align: left;
+}
+
+.dropdown-menu {
+    margin-left: 70px;
+}
+
+.dropdown2 {
+    margin-left: 60px;
+    width: 200px;
+    text-align: left;
+}
+
+.gambar {
+    width: 240px;
+    margin-left: 30px;
+}
+
+.stock {
+    width: 120px;
+    margin-left: 40px;
+}
+
+.tombol {
+    border-radius: 5px;
+}
+
+.table {
+    width: 1000px;
+    line-height: normal;
+
+}
+
+.container2 {
+    width: fit-content;
+    margin-top: 100px;
+}
+
+.container2 tbody {
+    font-size: 10px;
+}
+
+.image {
+    width: 100px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.place {
+    margin-left: 130px;
+    width: 240px;
+    height: 30px;
+    margin-top: -33px;
+}
+
+.place2 {
+    margin-left: 60px;
+}
+
+.container2 thead {
+    font-size: 10px;
+}

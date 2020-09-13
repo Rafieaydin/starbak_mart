@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!--Font css-->
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8df2bf9a39.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="belajar.css">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="ml-3 mt-3" style="font-size: 19px;">FORM INPUT MASTER dan Stock DATA BARANG</p>
+        <!-- kode product -->
+        <label for="text" class="mt-1 ml-4">Kode product</label>
+        <input type="text" id="kode_pro" class="ml-4 mt-3 kode_pro" disabled placeholder="MD-01">
+        <div class="ml-4">
+            <!-- nama_product -->
+            <label for="nama" class="font">Nama Produk</label>
+            <input type="text" placeholder="Nama Product" id="nama_pro" class="ml-4 mt-3 nama_pro">
+        </div>
+        <div class="ml-4">
+            <!-- harga -->
+            <label for="nama" class="font mt-3">Harga Produk</label>
+            <input type="text" placeholder="harga " id="harga" class="ml-4 mt-3 harga">
+        </div>
+        <div class="ml-4 mt-3">
+            <!-- satuan -->
+            <label for="satuna">satuan </label>
+            <input type="text" class="place2" placeholder="pilih kategori" maxlength="25" list="satuan1" id="satuan">
+            <datalist id="satuan1">
+                <option>Minuman dingin</option>
+                <option>Minuman Hangat</option>
+                <option>Snack</option>
+                <option>Makanan</option>
+            </datalist>
+        </div>
+        <div class="mt-3 ml-4">
+            <!-- kategori -->
+            <label for="kategori">kategori</label>
+            <input type="text" class="place2" placeholder="pilih kategori" maxlength="25" list="kategoriproduk"
+                id="kategori" onchange="kodeproduk(this.value)">
+            <datalist id="kategoriproduk">
+                <option>Minuman dingin</option>
+                <option>Minuman Hangat</option>
+                <option>Snack</option>
+                <option>Makanan</option>
+            </datalist>
+        </div>
+
+        <div class="ml-4 ">
+            <!-- Gambar -->
+            <label for="nama" class="font">URL Gambar</label>
+            <input type="text" placeholder="Contoh: Gabar.png" id="gambar" class=" mt-3 gambar" autocomplete="off">
+        </div>
+        <!-- Stock awal -->
+        <label for="nama" class="font mt-3 ml-4">Stock awal</label>
+        <input type="number" placeholder="stock " id="stock" class="mt-3 stock">
+        <br>
+        <button type="button" class="btn btn-primary ml-3 mt-3 mb-4" onclick="pesan()" id="button1">Masukan</button>
+        <button type="button" class="btn btn-secondary ml-3 mt-3 mb-4" onclick="batal()" id="button">Batal</button>
+        <button type="button" class="btn btn-primary ml-3 mt-3 mb-4" onclick="simpanedit()" id="button2">Masukan</button>
+
+    </div>
+    <center>
+        <div class="container2">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Kode Produk</th>
+                        <th scope="col">Nama Produk</th>
+                        <th scope="col">Harga produk</th>
+                        <th scope="col">Satuan produk</th>
+                        <th scope="col">kategory Produk</th>
+                        <th scope="col">Stock Produk</th>
+                        <th scope="col">Gambar Produk</th>
+                        <th scope="col">Modify</th>
+                    </tr>
+                </thead>
+                <tbody id="tampildata">
+
+                </tbody>
+            </table>
+        </div>
+    </center>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+    <script src="belajar.js">
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
