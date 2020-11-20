@@ -1,0 +1,108 @@
+body{
+    text-align: center;
+    overflow-y: scroll
+}
+
+
+h1{
+    text-align: center;
+    margin-top: 170px;
+}
+
+.main{
+    margin-top: 8%;
+}
+
+
+/* dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    /*for side-to-side cards:
+  display: inline-block; 
+  float: left;
+  
+  for vertical cards:"
+  display: block;
+  no float.
+  */
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+}
+
+.title {
+    position: relative;
+    font-size: 30px;
+    padding: 0 0 8px 0;
+}
+
+.title span::after {
+    float: right;
+    content: "-";
+}
+
+.contents {
+    display: block;
+    clear: both;
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.contents p {
+    margin-top: 20px;
+    background-color: black;
+    padding: 20px;
+    box-shadow:  0 0 15px black;
+    text-align: left;
+    max-height: 500px;
+}
+.a{
+   text-align: center;
+   margin-left: 300px;
+}img{
+    width: 60%;
+    margin-left: 200px;
+    margin-top: -200px;
+}
+.btn {
+    padding: 20px 20px 20px 20px #333;
+}
+form {
+    overflow: hidden;
+}
+
+label {
+    float: left;
+    width: 200px;
+    padding-right: 24px;
+}
+
+input {
+    float: left;
+    width: calc(100% - 200px);
+}
+
+button {
+    float: right;
+    width: calc(100% - 200px);
+}.card-header{
+    background-color: #333;
+    color: white;
+}
+.main2{
+    background-color: #333;
+    height: 100%;
+    color: white;
+}span{
+    margin-left: 20px;
+    display: block;
+    padding-top: 10px;
+    
+}
