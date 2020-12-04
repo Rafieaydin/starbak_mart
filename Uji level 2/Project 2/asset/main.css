@@ -1,0 +1,57 @@
+.container {
+    width: 440px;
+    margin-top: 80px;
+    border-radius: 5px;
+    border-collapse: black;
+    border-style: solid;
+    font-family: 'Grandstander',
+        cursive;
+}
+
+.label {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.textForm {
+    text-align: left;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+.form {
+    width: 200px;
+}
+
+.stock {
+    width: 100px;
+}
+
+.kode_pro {
+    width: 200px;
+    background-color: white;
+    border: #e74c3c;
+}
+
+/* table */
+.container-sm {
+    margin-top: 100px;
+}
+
+.container-sm img {
+    width: 100px;
+   
+}
+
+.container-sm tbody button {
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -1000px;
+}
+
+.container-sm thead {
+    text-align: center;
+    font-size: 13px;
+}
