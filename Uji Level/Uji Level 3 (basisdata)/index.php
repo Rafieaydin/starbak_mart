@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'koneksi.php';
-$barang = query('SELECT * FROM stockbarang');
+$barang = query('SELECT * FROM stockbarang ORDER BY id ASC' );
 
 if (isset($_POST['beli'])) {
     if (tambah($_POST) > 0) { // > 0 = berhasil

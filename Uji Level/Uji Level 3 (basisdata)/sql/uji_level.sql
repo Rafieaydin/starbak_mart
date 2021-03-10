@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Mar 2021 pada 04.32
+-- Waktu pembuatan: 10 Mar 2021 pada 07.07
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.10
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `uji_level`
 --
+
+DELIMITER $$
+--
+-- Prosedur
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CekBarangKejual` (IN `namaBarang` VARCHAR(20))  BEGIN
+SELECT 
+stockbarang.nama AS nama_barang, 
+SUM(orderbarang.stock) AS total_kejual, 
+SUM(orderbarang.stock) * stockbarang.harga AS total_harga
+FROM orderbarang, stockbarang
+WHERE orderbarang.barang_id = stockbarang.id
+AND stockbarang.nama = namaBarang;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CekStockBarang` (IN `val` VARCHAR(20))  BEGIN
+SELECT nama,stock,harga,created_at FROM stockbarang WHERE nama = val ;
+END$$
+
+--
+-- Fungsi
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `CekPenjualan` (`barang` VARCHAR(20)) RETURNS VARCHAR(100) CHARSET utf8mb4 BEGIN
+DECLARE stock int;
+SELECT COUNT(*) INTO stock FROM orderbarang,stockbarang
+WHERE orderbarang.barang_id = stockbarang.id 
+AND stockbarang.nama = barang; 
+IF(stock>1)THEN
+RETURN 
+CONCAT("Total penjualan ",barang," adalah ",stock," Buah");
+ELSE
+RETURN "Anda belum menjual satu pun dari barang ini";
+END IF;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -166,7 +202,30 @@ INSERT INTO `belibarang` (`id`, `jumlah_barang`, `total_harga`, `created_at`) VA
 (631, 1, 0, '2021-03-08 21:22:38'),
 (632, 1, 0, '2021-03-08 21:22:41'),
 (633, 1, 0, '2021-03-08 21:22:43'),
-(634, 1, 0, '2021-03-08 21:30:26');
+(634, 1, 0, '2021-03-08 21:30:26'),
+(635, 1, 0, '2021-03-08 21:35:38'),
+(636, 4, 60000, '2021-03-08 21:35:56'),
+(637, 2, 40000, '2021-03-08 21:36:20'),
+(638, 3, 30000, '2021-03-08 21:55:01'),
+(639, 1, 9000, '2021-03-08 21:55:11'),
+(640, 1, 9000, '2021-03-08 21:55:16'),
+(641, 1, 18000, '2021-03-08 22:30:21'),
+(642, 1, 18000, '2021-03-08 22:30:31'),
+(643, 9, 90000, '2021-03-09 00:22:15'),
+(644, 9, 90000, '2021-03-09 01:37:15'),
+(645, 3, 30000, '2021-03-09 01:37:37'),
+(646, 2, 20000, '2021-03-09 01:37:52'),
+(647, 2, 20000, '2021-03-09 01:38:05'),
+(648, 3, 30000, '2021-03-09 01:38:14'),
+(649, 2, 20000, '2021-03-09 01:38:52'),
+(650, 4, 40000, '2021-03-09 01:39:10'),
+(651, 8, 80000, '2021-03-09 01:39:52'),
+(652, 5, 52000, '2021-03-09 01:45:48'),
+(653, 21, 3364000, '2021-03-09 01:51:05'),
+(654, 4, 40000, '2021-03-09 19:31:27'),
+(655, 4, 54000, '2021-03-09 19:31:43'),
+(656, 9, 113000, '2021-03-10 00:01:27'),
+(657, 5, 9000, '2021-03-10 00:04:17');
 
 -- --------------------------------------------------------
 
@@ -181,6 +240,45 @@ CREATE TABLE `orderbarang` (
   `stock` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `orderbarang`
+--
+
+INSERT INTO `orderbarang` (`id`, `barang_id`, `belibarang_id`, `stock`, `created_at`) VALUES
+(202, 71, 638, 3, '2021-03-08 21:55:01'),
+(203, 71, 639, 1, '2021-03-08 21:55:11'),
+(204, 71, 640, 1, '2021-03-08 21:55:16'),
+(205, 77, 641, 1, '2021-03-08 22:30:21'),
+(206, 77, 642, 1, '2021-03-08 22:30:31'),
+(207, 71, 643, 5, '2021-03-09 00:22:15'),
+(208, 72, 643, 4, '2021-03-09 00:22:15'),
+(209, 71, 644, 5, '2021-03-09 01:37:15'),
+(210, 75, 644, 4, '2021-03-09 01:37:15'),
+(211, 71, 645, 3, '2021-03-09 01:37:37'),
+(212, 71, 646, 2, '2021-03-09 01:37:52'),
+(213, 72, 647, 2, '2021-03-09 01:38:05'),
+(214, 75, 648, 1, '2021-03-09 01:38:14'),
+(215, 72, 648, 2, '2021-03-09 01:38:14'),
+(216, 72, 649, 2, '2021-03-09 01:38:52'),
+(217, 73, 650, 2, '2021-03-09 01:39:10'),
+(218, 74, 650, 2, '2021-03-09 01:39:10'),
+(219, 73, 651, 4, '2021-03-09 01:39:52'),
+(220, 74, 651, 4, '2021-03-09 01:39:52'),
+(221, 73, 652, 2, '2021-03-09 01:45:48'),
+(222, 78, 652, 3, '2021-03-09 01:45:48'),
+(223, 75, 653, 1, '2021-03-09 01:51:05'),
+(224, 86, 653, 18, '2021-03-09 01:51:05'),
+(225, 78, 653, 2, '2021-03-09 01:51:05'),
+(226, 73, 654, 2, '2021-03-09 19:31:27'),
+(227, 74, 654, 2, '2021-03-09 19:31:27'),
+(228, 74, 655, 2, '2021-03-09 19:31:43'),
+(229, 78, 655, 1, '2021-03-09 19:31:43'),
+(230, 77, 655, 1, '2021-03-09 19:31:43'),
+(231, 75, 656, 5, '2021-03-10 00:01:27'),
+(232, 76, 656, 3, '2021-03-10 00:01:27'),
+(233, 77, 656, 1, '2021-03-10 00:01:27'),
+(234, 85, 657, 5, '2021-03-10 00:04:17');
 
 --
 -- Trigger `orderbarang`
@@ -217,6 +315,28 @@ CREATE TABLE `stockbarang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data untuk tabel `stockbarang`
+--
+
+INSERT INTO `stockbarang` (`id`, `nama`, `harga`, `stock`, `gambar`, `created_at`) VALUES
+(71, 'Sate padang', 10000, 0, 'http://kbu-cdn.com/dk/wp-content/uploads/sate-kakul.jpg', '2021-03-09 07:37:53'),
+(72, 'Tempe Goreng', 10000, 0, 'https://asset.kompas.com/crops/iEJb6R_R0VbEDp59hCH4DzgvxxE=/0x41:1000x708/750x500/data/photo/2020/04/01/5e841eccea33c.jpg', '2021-03-09 07:38:52'),
+(73, 'Bakso kuah', 8000, 0, 'https://statik.tempo.co/data/2018/06/03/id_709908/709908_720.jpg', '2021-03-10 01:31:27'),
+(74, 'Martabak', 12000, 20, 'http://asset-a.grid.id/crop/0x0:0x0/x/photo/2018/06/12/32757420.jpg', '2021-03-10 01:31:43'),
+(75, 'Kentang Goreng', 10000, 9, 'https://img.okezone.com/content/2018/07/11/298/1920897/membuat-kentang-goreng-rumahan-serenyah-di-restoran-PzeLEom9j8.jpg', '2021-03-10 06:01:27'),
+(76, 'Mie goreng', 15000, 7, 'http://kbu-cdn.com/dk/wp-content/uploads/mie-goreng-saus-tiram.jpg', '2021-03-10 06:01:27'),
+(77, 'Kwetiau goreng', 18000, 8, 'https://www.masakapahariini.com/wp-content/uploads/2020/09/kwetiau-goreng-seafood-780x440.jpg', '2021-03-10 06:01:27'),
+(78, 'Iga Goreng', 12000, 4, 'https://cdn-2.tstatic.net/jogja/foto/bank/images/iga-bakar-sapi.jpg', '2021-03-10 01:31:43'),
+(79, 'Siomay', 6000, 8, 'http://kbu-cdn.com/dk/wp-content/uploads/siomay-praktis.jpg', '2021-03-08 22:33:29'),
+(80, 'Siomay Bakar', 18000, 13, 'http://kbu-cdn.com/dk/wp-content/uploads/cilok-bakar.jpg', '2021-03-08 22:34:25'),
+(81, 'Burger', 17000, 10, 'https://www.rukita.co/stories/wp-content/uploads/2020/02/byurger.jpg', '2021-03-09 04:45:00'),
+(82, 'Pizza', 12000, 10, 'https://www.kabarbisnis.com/images/picture/202010/754-PizzaHut.jpg', '2021-03-08 17:00:00'),
+(83, 'Cilok', 5000, 20, 'https://img.inews.co.id/media/822/files/inews_new/2020/03/30/IMG_30032020_182439__822_x_430_piksel_.jpg', '2021-03-08 17:00:00'),
+(84, 'Nasi goreng', 10000, 7, 'https://www.denpasarkota.go.id/uploads/datang/datang_192709040901_5WarungNasiGorengLezatdenganHargayangBersahabat.jpg', '2021-03-08 17:00:00'),
+(85, 'Kripik Singkong', 2000, 5, 'https://asset.kompas.com/crops/-J7WiKZ7PvZGagZz-F3AJrI_4S8=/0x46:700x513/750x500/data/photo/2020/08/24/5f43a77a3c43e.jpg', '2021-03-10 06:04:17'),
+(86, 'Dimsum', 185000, 0, 'https://asset.kompas.com/crops/DEDxeclyBPPZ2miRZhxGFJxhHU0=/0x175:800x708/750x500/data/photo/2021/01/18/60053789dc100.jpg', '2021-03-09 07:51:06');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -248,19 +368,19 @@ ALTER TABLE `stockbarang`
 -- AUTO_INCREMENT untuk tabel `belibarang`
 --
 ALTER TABLE `belibarang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=635;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=658;
 
 --
 -- AUTO_INCREMENT untuk tabel `orderbarang`
 --
 ALTER TABLE `orderbarang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- AUTO_INCREMENT untuk tabel `stockbarang`
 --
 ALTER TABLE `stockbarang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

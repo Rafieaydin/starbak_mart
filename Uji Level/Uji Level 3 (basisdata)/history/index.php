@@ -2,14 +2,12 @@
 session_start();
 require '../koneksi.php';
 $barang = query("SELECT 
-GROUP_CONCAT(stockbarang.nama) AS nama, 
-GROUP_CONCAT(orderbarang.stock) AS total_stock,
-GROUP_CONCAT(stockbarang.harga) AS harga,
-belibarang.total_harga AS total_harga,
-orderbarang.created_at FROM orderbarang
-INNER JOIN stockbarang ON orderbarang.barang_id = stockbarang.id
-INNER JOIN belibarang ON orderbarang.belibarang_id = belibarang.id
-GROUP BY created_at
+GROUP_CONCAT(log_history.nama ORDER BY created_at ASC) AS nama, 
+GROUP_CONCAT(log_history.stock ORDER BY created_at ASC) AS total_stock  ,
+GROUP_CONCAT(log_history.harga ORDER BY created_at ASC) AS harga,
+sum(log_history.total_harga)  AS total_harga,
+log_history.created_at FROM log_history
+GROUP BY created_at ORDER BY created_at DESC
 ");
 ?>
 
@@ -90,7 +88,12 @@ GROUP BY created_at
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <?php foreach ($barang as $key => $brg) { ?>
+                                <?php foreach ($barang as $key => $brg) {
+                                $total = $brg['total_harga'];
+                                $discount = $total * 0.10;
+                                $ppn = $total * 0.10;
+                                ($total > 10000) ? $total = $total + $discount - $ppn : $total = $total - $ppn;
+                                ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $brg['nama'] ?></td>
@@ -104,7 +107,7 @@ GROUP BY created_at
                                             echo join(',', $rupiah);
                                             ?>
                                         </td>
-                                        <td><?= rupiah($brg['total_harga']) ?></td>
+                                        <td><?= rupiah($total) ?></td>
                                         <td><?= date('Y/m/d', strtotime($brg['created_at'])) ?></td>
                                     </tr>
                                 <?php } ?>

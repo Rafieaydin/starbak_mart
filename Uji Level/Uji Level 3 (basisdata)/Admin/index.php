@@ -5,7 +5,7 @@ $barang = query(
     'SELECT stockbarang.id,stockbarang.nama,stockbarang.stock AS stockbarang, 
 stockbarang.harga, stockbarang.gambar, SUM(orderbarang.stock) AS belistock
 FROM stockbarang LEFT JOIN orderbarang ON stockbarang.id = orderbarang.barang_id
-GROUP BY stockbarang.id ORDER BY stockbarang.created_at ASC
+GROUP BY stockbarang.id ORDER BY stockbarang.id DESC
 '
 );
 ?>

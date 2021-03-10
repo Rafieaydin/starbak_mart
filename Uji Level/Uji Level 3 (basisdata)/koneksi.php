@@ -70,7 +70,7 @@ function tambahAdmin($POST)
     $nama = htmlspecialchars($POST['nama']);
     $stock = htmlspecialchars($POST['stock']);
     $harga =  htmlspecialchars($_POST['harga']); // harga benjadi int
-    $tanggal = date("y/m/d H:i:s");
+    $tanggal = date("y/m/d");
     $query = "INSERT INTO stockbarang VALUES('','$nama',".(int)$harga.",".(int)$stock.",'$gambar','$tanggal')";
     var_dump(mysqli_query($conn, $query));
     return mysqli_affected_rows($conn);
