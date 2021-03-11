@@ -57,7 +57,9 @@ function tambah($val){
 function hapusAdmin($id)
 {
     global $conn;
-    $query = "DELETE FROM stockbarang WHERE id = $id";
+    $tanggal = date("y/m/d H:i:s");
+    $query = "UPDATE stockbarang SET deleted_at='$tanggal'  WHERE id = $id";
+    // $query = "DELETE FROM stockbarang WHERE id = $id";
 
     mysqli_query($conn,$query);
     return mysqli_affected_rows($conn);
@@ -71,7 +73,7 @@ function tambahAdmin($POST)
     $stock = htmlspecialchars($POST['stock']);
     $harga =  htmlspecialchars($_POST['harga']); // harga benjadi int
     $tanggal = date("y/m/d");
-    $query = "INSERT INTO stockbarang VALUES('','$nama',".(int)$harga.",".(int)$stock.",'$gambar','$tanggal')";
+    $query = "INSERT INTO stockbarang VALUES('','$nama',".(int)$harga.",".(int)$stock.",'$gambar','$tanggal',NULL)";
     var_dump(mysqli_query($conn, $query));
     return mysqli_affected_rows($conn);
 }
@@ -93,4 +95,6 @@ function updateAdmin($POST)
     mysqli_query($conn,$query);
     return mysqli_affected_rows($conn);
 }
+
+
 ?>

@@ -2,10 +2,13 @@
 session_start();
 require '../koneksi.php';
 $barang = query(
-    'SELECT stockbarang.id,stockbarang.nama,stockbarang.stock AS stockbarang, 
-stockbarang.harga, stockbarang.gambar, SUM(orderbarang.stock) AS belistock
-FROM stockbarang LEFT JOIN orderbarang ON stockbarang.id = orderbarang.barang_id
-GROUP BY stockbarang.id ORDER BY stockbarang.id DESC
+    'SELECT stockbarang.id,
+    stockbarang.nama,
+    stockbarang.stock AS stockbarang, stockbarang.harga, 
+    stockbarang.gambar, 
+    SUM(orderbarang.stock) AS belistock FROM stockbarang 
+    LEFT JOIN orderbarang ON stockbarang.id = orderbarang.barang_id WHERE stockbarang.deleted_at IS NULL
+    GROUP BY stockbarang.id ORDER BY stockbarang.id DESC
 '
 );
 ?>
@@ -138,7 +141,7 @@ GROUP BY stockbarang.id ORDER BY stockbarang.id DESC
             var table = $('#table_id').DataTable({
                 "dom": 't<"bottom"<"row"<"col-6"i><"col-6"p>>>',
             });
-            
+
             $('#filter').keyup(function() {
                 table
                     .column(2)

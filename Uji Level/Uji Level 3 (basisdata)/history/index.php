@@ -2,11 +2,13 @@
 session_start();
 require '../koneksi.php';
 $barang = query("SELECT 
-GROUP_CONCAT(log_history.nama ORDER BY created_at ASC) AS nama, 
-GROUP_CONCAT(log_history.stock ORDER BY created_at ASC) AS total_stock  ,
-GROUP_CONCAT(log_history.harga ORDER BY created_at ASC) AS harga,
-sum(log_history.total_harga)  AS total_harga,
-log_history.created_at FROM log_history
+GROUP_CONCAT(stockbarang.nama) AS nama, 
+GROUP_CONCAT(orderbarang.stock) AS total_stock,
+GROUP_CONCAT(stockbarang.harga) AS harga,
+belibarang.total_harga AS total_harga,
+orderbarang.created_at FROM orderbarang
+INNER JOIN stockbarang ON orderbarang.barang_id = stockbarang.id
+INNER JOIN belibarang ON orderbarang.belibarang_id = belibarang.id
 GROUP BY created_at ORDER BY created_at DESC
 ");
 ?>
