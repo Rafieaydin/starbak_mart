@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'koneksi.php';
-$barang = query('SELECT * FROM stockbarang WHERE deleted_at IS NULL ORDER BY id ASC' );
+$barang = query('SELECT * FROM stockbarang WHERE deleted_at IS NULL ORDER BY id DESC' );
 
 if (isset($_POST['beli'])) {
     if (tambah($_POST) > 0) { // > 0 = berhasil
@@ -78,7 +78,7 @@ if (isset($_POST['beli'])) {
                     <div class="row ">
                         <!-- keranjang brang -->
                         <?php foreach ($_SESSION as $key => $val) {
-                            // var_dump($_SESSION);
+                            // var_dump($val);
                             $getKey = $key;
                             $getID = explode(".", $key)[1];
                             $getData = query("SELECT * FROM stockbarang WHERE id = $getID");

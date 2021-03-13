@@ -23,13 +23,15 @@ function rupiah($angka)
     $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
     return $hasil_rupiah;
 }
-function tambah($val){
+
+function tambah($val)
+{
     global $conn;
     // var_dump($_SESSION);
     // print('jangan pamer eror blok');
     foreach ($_SESSION as $key => $value) { 
         $id = explode('.',$key)[1];
-        $tanggal = date("y/m/d H:i:s");
+        $tanggal = date("y/m/d H:i:s", strtotime('+ 6 hours'));
         $getData = query("SELECT * FROM stockbarang WHERE id = $id");
         foreach ($getData as $keranjang) {
             (isset($total)) ? $total = $keranjang['harga'] * $value + $total : $total = $keranjang['harga'] * $value;

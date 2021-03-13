@@ -2,9 +2,9 @@
 session_start();
 require '../koneksi.php';
 $barang = query("SELECT 
-GROUP_CONCAT(stockbarang.nama) AS nama, 
-GROUP_CONCAT(orderbarang.stock) AS total_stock,
-GROUP_CONCAT(stockbarang.harga) AS harga,
+GROUP_CONCAT(stockbarang.nama ORDER BY orderbarang.created_at ASC) AS nama, 
+GROUP_CONCAT(orderbarang.stock ORDER BY orderbarang.created_at ASC) AS total_stock,
+GROUP_CONCAT(stockbarang.harga ORDER BY orderbarang.created_at ASC) AS harga,
 belibarang.total_harga AS total_harga,
 orderbarang.created_at FROM orderbarang
 INNER JOIN stockbarang ON orderbarang.barang_id = stockbarang.id
