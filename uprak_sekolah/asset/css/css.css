@@ -1,0 +1,11 @@
+.nama_card{
+    font-size: 13px !important;
+    font-weight: bold;
+}
+.nama_alamat {
+    display: inline-block;
+    font-size: 10px !important;
+}
+a:link {
+    text-decoration: none;
+}
