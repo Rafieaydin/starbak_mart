@@ -1,6 +1,9 @@
 <?php
-require 'koneksi.php';
-$perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
+require '../koneksi.php';
+
+session_start();
+!isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
+$perusahaan = query("SELECT COUNT(*) as jumlah FROM perusahaan")[0];
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +20,12 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
     <title>Uprak PHP</title>
 
     <!-- Custom fonts for this template-->
-    <link href="asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="asset/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- costom css -->
-    <link rel="stylesheet" href="asset/css/css.css">
+    <link href="../asset/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/pakage/datatables/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -44,18 +45,12 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
                 <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link " href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -64,7 +59,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link active" href="admin/index.php">
+                <a class="nav-link " href="index.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Data Perusahaan</span>
                 </a>
@@ -103,7 +98,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3">Rafie aydin ihsan</span>
-                                <img class="img-profile rounded-circle" src="asset/image/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../asset/image/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -120,7 +115,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="../auth/logout.php">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -134,55 +129,55 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <!-- DataTales Example -->
+                    <div class="row">
 
-                    <!-- Content Row -->
-                    <div class="card shadow">
-                        <h3 class=" text-dark mb-5 mt-5 text-center">List perusahaan </h3>
-                        <div class="row d-flex ml-2 mr-2">
-                            <?php foreach ($perusahaan as $key => $value) { ?>
-                                <div class="col-md-3 mt-2 ">
-                                    <a href="detail.php?id=<?= $value['id'] ?>">
-                                        <div class="card">
-                                            <img class="card-img-top" src="<?= $value['foto'] ?>" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title nama_card text-center text-dark"><?= $value['nama'] ?></h5>
-                                                <h5 class="card-title nama_alamat text-dark"><span class="font-weight-bold">alamat :</span> <br> <?= $value['alamat'] ?></h5>
-                                            </div>
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Jumlah perusahaan</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $perusahaan['jumlah'] ?></div>
                                         </div>
-                                    </a>
+                                        <div class="col-auto">
+                                            <i class="fa fa-building fa-2x text-gray-300" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            <?php } ?>
+                            </div>
                         </div>
+
                     </div>
-
-
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
 
             </div>
-            <!-- End of Main Content -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Bootstrap core JavaScript-->
+        <script src="../asset/pakage/jquery/jquery.min.js"></script>
+        <script src="../asset/pakage/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="asset/pakage/jquery/jquery.min.js"></script>
-    <script src="asset/pakage/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../asset/pakage/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="asset/pakage/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../asset/js/sb-admin-2.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="asset/js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../asset/pakage/chart.js/Chart.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="asset/pakage/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
+        <!-- Page level custom scripts -->
+        <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="../asset/pakage/datatables/dataTables.bootstrap4.min.js"></script>
 
 </body>
 

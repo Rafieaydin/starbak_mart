@@ -1,7 +1,12 @@
 <?php
-require 'koneksi.php';
-$id = $_GET['id'];
-$perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
+require '../koneksi.php';
+
+session_start();
+
+!isset($_SESSION['user']) ? header("Location: ../index.php") : '' ;
+
+$name = $_SESSION['user']['username'];
+$perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +23,14 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
     <title>Uprak PHP</title>
 
     <!-- Custom fonts for this template-->
-    <link href="asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="asset/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../asset/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- costom css -->
-    <link rel="stylesheet" href="asset/css/css.css">
+    <link rel="stylesheet" href="../asset/css/css.css">
 
 </head>
 
@@ -45,9 +50,6 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
                 <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link " href="dashboard.php">
@@ -55,21 +57,6 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item ">
-                <a class="nav-link active" href="admin/index.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data Perusahaan</span>
-                </a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -103,8 +90,8 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3">Rafie aydin ihsan</span>
-                                <img class="img-profile rounded-circle" src="asset/image/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3"><?= $name ?></span>
+                                <img class="img-profile rounded-circle" src="../asset/image/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -121,7 +108,7 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="../auth/logout.php" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -138,35 +125,21 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
 
                     <!-- Content Row -->
                     <div class="card shadow">
-                        <div class="row ml-2 mt-4">
-                            <div class="col-md-6">
-                                <img src="<?= $perusahaan['foto'] ?>" width="500px" alt="">
-                                <div class="deskripsi mt-2 mb-5 mx-auto text-justify">
-                                    <label for="" class="font-weight-bold">Deskripsi perusahan</label><br>
-                                    <?= $perusahaan['deskripsi_perusahaan'] ?>
+                        <h3 class=" text-dark mb-5 mt-5 text-center">List perusahaan </h3>
+                        <div class="row d-flex ml-2 mr-2">
+                            <?php foreach ($perusahaan as $key => $value) { ?>
+                                <div class="col-md-3 mt-2 ">
+                                    <a href="detail.php?id=<?= $value['id'] ?>">
+                                        <div class="card">
+                                            <img class="card-img-top" src="<?= $value['foto'] ?>"  height="150px" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title nama_card text-center text-dark"><?= $value['nama'] ?></h5>
+                                                <h5 class="card-title nama_alamat text-dark"><span class="font-weight-bold">alamat :</span> <br> <?= $value['alamat'] ?></h5>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="nama ml-3 mt-2">
-                                    <label for="" class="font-weight-bold">Nama perusahaan</label> <br>
-                                    <?= $perusahaan['nama'] ?>
-                                </div>
-                                <div class="alamat ml-3 mt-2">
-                                    <label for="" class="font-weight-bold">Alamat perusahaan</label> <br>
-                                    <?= $perusahaan['alamat'] ?>
-                                </div>
-                                <div class="email ml-3 mt-2">
-                                    <label for="" class="font-weight-bold">Email perusahaan</label> <br>
-                                    <?= $perusahaan['email'] ?>
-                                </div>
-                                <div class="nama_petinggi ml-3 mt-2">
-                                    <label for="" class="font-weight-bold">Nama petingi perusahaan</label> <br>
-                                    <?= $perusahaan['nama_pemimpin'] ?>
-                                </div>
-                                <div class="button ml-3 mt-3">
-                                    <a href="dashboard.php" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> kembali</a>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -185,17 +158,17 @@ $perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
     <!-- End of Page Wrapper -->
 
     <!-- Bootstrap core JavaScript-->
-    <script src="asset/pakage/jquery/jquery.min.js"></script>
-    <script src="asset/pakage/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../asset/pakage/jquery/jquery.min.js"></script>
+    <script src="../asset/pakage/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="asset/pakage/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../asset/pakage/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="asset/js/sb-admin-2.min.js"></script>
+    <script src="../asset/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="asset/pakage/chart.js/Chart.min.js"></script>
+    <script src="../asset/pakage/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
 

@@ -5,17 +5,41 @@ $password = "";
 $database  = "uprak_pwpb";
 $conn = mysqli_connect($server, $user, $password, $database);
 
-
+// untuk show
 function query($query)
 {
+    
     global $conn;
     $result = mysqli_query($conn, $query);
+    
     $box = [];
     while ($isi = mysqli_fetch_assoc($result)) {
         $box[] = $isi;
     }
+
     return $box;
 }
+
+
+
+
+// register
+function register($post)
+{
+    global $conn;
+    $username = htmlspecialchars($post['username']);
+    $email = htmlspecialchars($post['email']);
+    $role = 'user';
+    $password = password_hash($post['password'], PASSWORD_DEFAULT);
+    $tanggal = date("y/m/d H:i:s");
+
+    $query = "INSERT INTO users VALUES('','$username','$email','$role','$password','$tanggal',NULL)";
+    
+    
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
 
 function tambahAdmin($post){
     global $conn;
@@ -27,8 +51,8 @@ function tambahAdmin($post){
     $deskripsi = htmlspecialchars($post['Deskripsi']);
     $tanggal = date("y/m/d H:i:s");
     
-    $query = query("INSERT INTO perusahaan 
-    VALUES('','$nama','$alamat','$foto','$email','$nama_pemimin','$deskripsi','$tanggal',NULL)");
+    $query = "INSERT INTO perusahaan 
+    VALUES('','$nama','$alamat','$foto','$email','$nama_pemimin','$deskripsi','$tanggal',NULL)";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }

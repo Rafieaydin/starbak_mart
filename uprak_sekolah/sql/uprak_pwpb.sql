@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Mar 2021 pada 07.04
+-- Waktu pembuatan: 24 Mar 2021 pada 05.09
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.10
 
@@ -58,8 +58,36 @@ INSERT INTO `perusahaan` (`id`, `nama`, `alamat`, `foto`, `email`, `nama_pemimpi
 (17, 'Conn-West', '6060 Gaylord Meadows\nLeannonchester, LA 57105', 'https://glints.com/id/lowongan/wp-content/uploads/2018/11/pexels-photo-269077-1.jpeg', 'buck54@yahoo.com', 'Jayden VonRueden', 'Non corporis asperiores libero est dolorum non sed. Dolorem quo ab nobis dolores laudantium velit. Quod et maxime vero et. Sit sunt adipisci quod nihil eaque sit. Voluptas blanditiis aliquam error voluptatem qui ex sint. Enim cum labore rerum. Ea labore officia deserunt natus. Voluptas voluptas debitis voluptatum atque facilis eius libero. A consequuntur ut omnis consectetur exercitationem nihil ex. Impedit corporis ex consequatur velit quis tenetur velit. Itaque velit totam est tempore. Ut similique eum soluta excepturi aliquam. Ut unde consequatur debitis qui nisi pariatur alias. Quibusdam est eum consequatur assumenda recusandae eos. Ipsam illo iusto tempora non. Ipsam optio magni voluptatibus vero asperiores labore. Unde asperiores possimus nesciunt eveniet vel repellat. Minima quia ea rem consequatur id in esse. Quam maiores qui et amet. Nisi voluptatibus sed repellat consequatur magni temporibus. Illum dolorem tenetur aut ea dolorum tempore.', '2021-03-14 12:35:41', NULL),
 (18, 'Reynolds LLC', '51075 Shields Turnpike Suite 466\nEast Jairotown, ME 20062', 'https://glints.com/id/lowongan/wp-content/uploads/2018/11/pexels-photo-269077-1.jpeg', 'cruickshank.herminia@gmail.com', 'Janae Hodkiewicz', 'Unde qui veniam eligendi mollitia quasi molestias. Architecto exercitationem sed nam sed voluptatibus molestiae. Beatae libero et eos eius placeat aut aut. Est rerum dolore est eaque ab consequuntur ea. Omnis repellendus consequatur deleniti pariatur eos accusantium porro. Laborum quos odio commodi qui earum omnis velit architecto. Molestias dolores exercitationem dolorum ullam est qui cupiditate. Ut enim ullam voluptatem. Veritatis quo est et dolor commodi enim. Eum voluptates debitis maiores esse sequi. Illo temporibus saepe quas eius consequatur corrupti eaque numquam. Dolorem exercitationem reiciendis incidunt nostrum modi soluta aut. Consequatur et natus reprehenderit error eius molestias. Nam a et deleniti similique. Accusamus soluta explicabo excepturi. Sint id magni quia distinctio sit libero beatae. Asperiores porro vero quaerat. Quis aut eaque dolor sed animi. Aut et adipisci accusamus tempore. Quia et sit aliquid voluptatibus tenetur qui adipisci.', '2021-03-14 12:35:41', NULL),
 (19, 'Green Ltd', '729 Hodkiewicz Key\nElfriedafort, MA 24234-0037', 'https://glints.com/id/lowongan/wp-content/uploads/2018/11/pexels-photo-269077-1.jpeg', 'rossie87@hotmail.com', 'Kathryn Ernser', 'Non ipsam id ut repellat ex suscipit et. Dicta autem voluptates aut vel. Quod totam sequi dolorem quia. Et voluptatibus ex sit animi enim. Blanditiis commodi architecto quibusdam harum non. Voluptates adipisci saepe doloremque nihil. Commodi quas asperiores nobis. Adipisci aut necessitatibus debitis qui labore dolor voluptatum consequatur. Labore harum sed atque. Voluptatem ad doloribus nesciunt in aut. Numquam soluta corrupti distinctio fugiat. Expedita exercitationem fugit voluptates enim totam. Labore animi sint mollitia est quos. Molestiae est vitae ea accusamus. Vel cumque et fugiat cupiditate. Quae voluptate dicta mollitia corrupti dolore repellendus. At voluptas aut distinctio et ipsa accusantium et. Exercitationem ipsam modi possimus quia. Itaque voluptas nulla omnis consequatur iusto fugit. Nam eaque sint iure exercitationem ducimus sed labore. Ut rerum molestiae dolor est perferendis in.', '2021-03-14 12:35:42', NULL),
-(20, 'Lowe, Waters and Bailey  2', '7402 McCullough Parkways Suite 325Monahanview, RI 41041', 'https://glints.com/id/lowongan/wp-content/uploads/2018/11/pexels-photo-269077-1.jpeg', 'wbailey@nienow.com', 'Dr. Wellington Ledner Jr.', '                                                                                                                                                                                                        Laborum recusandae earum fuga dolores. Dignissimos nemo ad aspernatur non laudantium reprehenderit explicabo. Inventore ut culpa beatae perferendis. Soluta consequatur explicabo suscipit maxime consequatur ipsa. Sit molestiae totam quis corporis dolor odio. Quis id rem consequatur doloribus exercitationem fuga voluptatum a. Quam animi ducimus ut at. Magni ut quibusdam et est perspiciatis voluptatem nulla. Impedit ipsa laboriosam id quia totam eum dolorem. Non autem magni nisi dolore quis voluptatem. Quam fugiat exercitationem debitis labore dicta quia assumenda qui. Asperiores occaecati veritatis voluptates eum. Fugit est dolorem ut architecto tenetur. Qui est fuga quo delectus. Ut reiciendis omnis facilis non. Dignissimos saepe labore ut id. Quia doloribus animi rerum quisquam. Dolores dolorem est et. Aut nihil est illum ratione quos. Eaque modi dolorem quos autem aut. Qui aliquam praesentium quidem optio odit. Corporis voluptate deleniti maiores dolorum rerum.                                                                                                                                                                                    ', '2021-03-14 12:35:43', '2021-03-22 21:44:29'),
-(23, '4234234', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://i.pinimg.com/736x/15/b1/5e/15b15e3584b05e45aef3992c47e5cde8.jpg', 'Yuhnpa@gmail.com', 'rafie aydiin ihsan 2', '                                        efewfwef                                    ', '2021-03-22 22:42:24', '2021-03-22 23:59:31');
+(20, 'Lowe, Waters and Bailey  2', '7402 McCullough Parkways Suite 325Monahanview, RI 41041', 'https://glints.com/id/lowongan/wp-content/uploads/2018/11/pexels-photo-269077-1.jpeg', 'wbailey@nienow.com', 'Dr. Wellington Ledner Jr.', '                                                                     222                                                                                                                                                                                                                   Laborum recusandae earum fuga dolores. Dignissimos nemo ad aspernatur non laudantium reprehenderit explicabo. Inventore ut culpa beatae perferendis. Soluta consequatur explicabo suscipit maxime consequatur ipsa. Sit molestiae totam quis corporis dolor odio. Quis id rem consequatur doloribus exercitationem fuga voluptatum a. Quam animi ducimus ut at. Magni ut quibusdam et est perspiciatis voluptatem nulla. Impedit ipsa laboriosam id quia totam eum dolorem. Non autem magni nisi dolore quis voluptatem. Quam fugiat exercitationem debitis labore dicta quia assumenda qui. Asperiores occaecati veritatis voluptates eum. Fugit est dolorem ut architecto tenetur. Qui est fuga quo delectus. Ut reiciendis omnis facilis non. Dignissimos saepe labore ut id. Quia doloribus animi rerum quisquam. Dolores dolorem est et. Aut nihil est illum ratione quos. Eaque modi dolorem quos autem aut. Qui aliquam praesentium quidem optio odit. Corporis voluptate deleniti maiores dolorum rerum.                                                                                                                                                                                                                                                            ', '2021-03-14 12:35:43', '2021-03-23 01:10:25'),
+(24, 'kejuruan 3', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://cdn.idntimes.com/content-images/community/2018/06/b0ad386455ddd6c75855d124ede39b7d_600x400.jpg', 'admin@gmail.com', 'rafie aydiin ihsan', '                                                                                ini perusahaan gue      2                                                                   ', '2021-03-23 00:34:11', '2021-03-23 01:10:02'),
+(27, '4234234', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://www.koranmadura.com/wp-content/uploads/2020/07/Tes-Kepribadian.jpeg', 'Yuhnpa@gmail.com', 'rafie aydiin ihsan 2', 'dwqdnqwdkjnqwdqwdqwd', '2021-03-23 01:11:32', NULL),
+(28, 'bakso', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://img.beritasatu.com/cache/investor/798x449-2/20170807125212651.jpg', 'admin@gmail.com', 'rafie aydiin ihsan', 'ini deskripsi', '2021-03-23 01:14:51', NULL),
+(30, '4234234', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://www.koranmadura.com/wp-content/uploads/2020/07/Tes-Kepribadian.jpeg', 'Yuhnpa@gmail.com', 'rafie aydiin ihsan', 'dwqdqwd', '2021-03-23 04:26:57', NULL),
+(31, 'Yuhnpa', 'Jl Yudistira Pasekan Maguwoharjo Depok Sleman, Jawa Tengah', 'https://www.koranmadura.com/wp-content/uploads/2020/07/Tes-Kepribadian.jpeg', 'Yuhnpa@gmail.com', 'rafie aydiin ihsan', 'dwedwdq', '2021-03-23 04:27:27', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `role`, `password`, `created_at`, `updated_at`) VALUES
+(4, 'admin', 'admin@gmail.com', 'admin', '$2y$10$co8DDL5NyOaXlKJ748JpVumFX2SQPMF76p/eK19ecltuNt9hWKsgi', '2021-03-23 19:06:25', NULL),
+(5, 'dana', 'dana@gmail.com', 'user', '$2y$10$I0hiiWrIHpJWQ.XjMdgE3.ziQRS3PSn22EBI8XomouAGWbFaQQAh6', '2021-03-23 21:01:38', NULL);
 
 --
 -- Indexes for dumped tables
@@ -72,6 +100,12 @@ ALTER TABLE `perusahaan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -79,7 +113,13 @@ ALTER TABLE `perusahaan`
 -- AUTO_INCREMENT untuk tabel `perusahaan`
 --
 ALTER TABLE `perusahaan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

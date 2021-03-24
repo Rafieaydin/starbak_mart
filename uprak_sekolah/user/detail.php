@@ -2,9 +2,10 @@
 require '../koneksi.php';
 
 session_start();
-!isset($_SESSION['admin']) ? header("Location: ../index.php") : '';
+!isset($_SESSION['user']) ? header("Location: ../index.php") : '';
 
-$perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
+$id = $_GET['id'];
+$perusahaan = query("SELECT * FROM perusahaan WHERE id = $id")[0];
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,9 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
 
     <!-- Custom styles for this template-->
     <link href="../asset/css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../asset/pakage/datatables/dataTables.bootstrap4.min.css">
+
+    <!-- costom css -->
+    <link rel="stylesheet" href="../asset/css/css.css">
 
 </head>
 
@@ -47,23 +50,10 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
             </a>
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
+            <li class="nav-item active">
                 <a class="nav-link " href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-            </li>
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link " href="index.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data Perusahaan</span>
-                </a>
             </li>
 
             <!-- Divider -->
@@ -130,52 +120,42 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- DataTales Example -->
-                    <a href="tambah.php" class="btn btn-primary mb-3">Tambah Data</a>
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data perusahaan</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>no</th>
-                                            <th>Name</th>
-                                            <!-- <th>alamat</th> -->
-                                            <th>nama_pemimpin</th>
-                                            <th>email</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($perusahaan as $key => $value) { ?>
-                                            <tr>
-                                                <td><?= $key + 1 ?></td>
-                                                <td><?= $value['nama'] ?></td>
-                                                <!-- <td><?= $value['alamat'] ?></td> -->
-                                                <td><?= $value['nama_pemimpin'] ?></td>
-                                                <td><?= $value['email'] ?></td>
-                                                <td>
-                                                    <a href="detail.php?id=<?= $value['id'] ?>" class=" btn-sm btn btn-primary btn-circle">
-                                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                                    </a>
-                                                    <a href="edit.php?id=<?= $value['id'] ?>" class=" btn-sm btn btn-warning btn-circle">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <button data-id="<?= $value['id'] ?>" class=" btn-sm btn btn-danger btn-circle hapus">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
 
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
+                    <!-- Content Row -->
+                    <div class="card shadow">
+                        <div class="row ml-2 mt-4">
+                            <div class="col-md-6">
+                                <img src="<?= $perusahaan['foto'] ?>" width="500px" height="333px" alt="">
+                                <div class="deskripsi mt-2 mb-5 mx-auto text-justify">
+                                    <label for="" class="font-weight-bold">Deskripsi perusahan</label><br>
+                                    <?= $perusahaan['deskripsi_perusahaan'] ?>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="nama ml-3 mt-2">
+                                    <label for="" class="font-weight-bold">Nama perusahaan</label> <br>
+                                    <?= $perusahaan['nama'] ?>
+                                </div>
+                                <div class="alamat ml-3 mt-2">
+                                    <label for="" class="font-weight-bold">Alamat perusahaan</label> <br>
+                                    <?= $perusahaan['alamat'] ?>
+                                </div>
+                                <div class="email ml-3 mt-2">
+                                    <label for="" class="font-weight-bold">Email perusahaan</label> <br>
+                                    <?= $perusahaan['email'] ?>
+                                </div>
+                                <div class="nama_petinggi ml-3 mt-2">
+                                    <label for="" class="font-weight-bold">Nama petingi perusahaan</label> <br>
+                                    <?= $perusahaan['nama_pemimpin'] ?>
+                                </div>
+                                <div class="button ml-3 mt-3">
+                                    <a href="dashboard.php" class="btn btn-success"><i class="fas fa-arrow-alt-circle-left"></i> kembali</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -183,15 +163,6 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
 
@@ -212,36 +183,7 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
     <script src="../asset/pakage/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="../asset/pakage/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- sweet alert -->
-    <script script src=" https://cdn.jsdelivr.net/npm/sweetalert2@10 "></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        })
-
-        $('.hapus').click(function() {
-            Swal.fire({
-                title: 'Apa anda yakin?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.value) {
-                    window.location.href = 'hapus.php?id="' + $(this).data('id') + '"';
-                    Swal.fire(
-                        'success',
-                        'Data anda berhasil di hapus.',
-                        'success'
-                    )
-                } else if (result.dismiss === Swal.DismissReason.cancel) {}
-            })
-        })
-    </script>
 </body>
 
 </html>
