@@ -3,7 +3,7 @@ require '../koneksi.php';
 
 session_start();
 
-!isset($_SESSION['user']) ? header("Location: ../index.php") : '' ;
+!isset($_SESSION['user']) ? header("Location: ../index.php") : '';
 
 $name = $_SESSION['user']['username'];
 $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
@@ -40,34 +40,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
     <div id="wrapper">
         <!-- sidebar -->
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link " href="dashboard.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-        </ul>
+        <?php include_once '../template/user/sidebar.php' ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -77,47 +50,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
             <div id="content">
 
                 <!-- navbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3"><?= $name ?></span>
-                                <img class="img-profile rounded-circle" src="../asset/image/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../auth/logout.php" >
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+                <?php include_once '../template/user/navbar.php' ?>
                 <!-- End of navbar -->
 
                 <!-- Begin Page Content -->
@@ -131,7 +64,7 @@ $perusahaan = query("SELECT * FROM perusahaan ORDER BY id DESC");
                                 <div class="col-md-3 mt-2 ">
                                     <a href="detail.php?id=<?= $value['id'] ?>">
                                         <div class="card">
-                                            <img class="card-img-top" src="<?= $value['foto'] ?>"  height="150px" alt="Card image cap">
+                                            <img class="card-img-top" src="<?= $value['foto'] ?>" height="150px" alt="Card image cap">
                                             <div class="card-body">
                                                 <h5 class="card-title nama_card text-center text-dark"><?= $value['nama'] ?></h5>
                                                 <h5 class="card-title nama_alamat text-dark"><span class="font-weight-bold">alamat :</span> <br> <?= $value['alamat'] ?></h5>

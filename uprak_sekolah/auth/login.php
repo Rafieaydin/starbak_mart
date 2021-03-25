@@ -4,26 +4,30 @@ require '../koneksi.php';
 if (isset($_POST['submit'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
-    $user = query("SELECT * FROM users WHERE username = '$username'")[0];
-
-
-    if ($user) {
-        if ($user['role'] === 'admin') {
-            if (password_verify($password, $user['password'])) {
-                session_start();
-                $_SESSION['admin'] = $user;
-                header("Location: ../admin/dashboard.php");
+    if (empty($username and $password) || empty($username) || empty($password)) {
+        $_SESSION['alertLogin'] = 'Data tidak boleh kosong';
+    } else {
+        $user = query("SELECT * FROM users WHERE username = '$username'")[0];
+        if ($user) {
+            if ($user['role'] === 'admin') {
+                if (password_verify($password, $user['password'])) {
+                    session_start();
+                    $_SESSION['admin'] = $user;
+                    header("Location: ../admin/dashboard.php");
+                }else{
+                    $_SESSION['alertLogin'] = 'Password salah';
+                }
+            }
+            if ($user['role'] === 'user') {
+                if (password_verify($password, $user['password'])) {
+                    session_start();
+                    $_SESSION['user'] = $user;
+                    header("Location: ../user/dashboard.php");
+                }else{
+                    $_SESSION['alertLogin'] = 'Password salah';
+                }
             }
         }
-        if ($user['role'] === 'user') {
-            if (password_verify($password, $user['password'])) {
-                session_start();
-                $_SESSION['user'] = $user;
-                header("Location: ../user/dashboard.php");
-            }
-        }
-    }else{
-        $a = 'data ini wajib di isi';
     }
 }
 ?>
@@ -69,6 +73,15 @@ if (isset($_POST['submit'])) {
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
+                                    <?php if (isset($_SESSION['alertLogin'])) { ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <?= $_SESSION['alertLogin'] ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <?php unset($_SESSION['alertLogin']) ?>
+                                        </div>
+                                    <?php } ?>
                                     <form class="user" method="POST">
                                         <div class="form-group">
                                             <input type="username" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Username...">
@@ -91,7 +104,7 @@ if (isset($_POST['submit'])) {
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="forgot-password.php">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="register.php">Create an Account!</a>

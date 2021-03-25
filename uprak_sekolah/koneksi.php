@@ -11,12 +11,16 @@ function query($query)
     
     global $conn;
     $result = mysqli_query($conn, $query);
-    
+
     $box = [];
-    while ($isi = mysqli_fetch_assoc($result)) {
+    if (empty($result)) {
+        $box[] = '';
+        return $box;
+    }
+    
+    while ($isi = mysqli_fetch_assoc($result) ) {
         $box[] = $isi;
     }
-
     return $box;
 }
 
@@ -33,6 +37,19 @@ function register($post)
     $password = password_hash($post['password'], PASSWORD_DEFAULT);
     $tanggal = date("y/m/d H:i:s");
 
+    if (empty($username and $email and $password) || empty($username) || empty($password) || empty($email)) {
+        return $_SESSION['alertRegis'] = 'Data tidak boleh kosong';
+    }
+    if ($post['password'] != $post['password2']) {
+        return $_SESSION['alertRegis'] = 'ulangi password anda';
+    }
+
+    $CekUser = query("SELECT * FROM users  WHERE role = 'user' and username = '$username'")[0];
+    
+    if (!empty($CekUser)) {
+        return $_SESSION['alertRegis'] = 'Username sudah terdaftar';
+    }
+
     $query = "INSERT INTO users VALUES('','$username','$email','$role','$password','$tanggal',NULL)";
     
     
@@ -40,6 +57,34 @@ function register($post)
     return mysqli_affected_rows($conn);
 }
 
+// fortgot password
+function reset_password($post)
+{
+    global $conn;
+    $username = htmlspecialchars($post['username']);
+    $password_baru = password_hash($post['password_baru'], PASSWORD_DEFAULT);
+    $password = htmlspecialchars($post['password']);
+    if (empty($username  and $password and $password_baru) || empty($username) || empty($password) || empty($password_baru)) {
+        return $_SESSION['alertReset'] = 'Data tidak boleh kosong';
+    }
+    if ($post['password_baru'] === $post['password'] ) {
+        return $_SESSION['alertReset'] = 'Password baru anda tidak boleh sama';
+    }
+
+    $user = query("SELECT * FROM users WHERE username = '$username' WHERE role = 'user' and username = '$username'")[0];
+    
+    if (empty($user)) {
+        return $_SESSION['alertReset'] = 'username tidak tersedia';
+    }
+    if (password_verify($password, $user['password'])) {
+        $query = "UPDATE users SET password = '$password_baru' WHERE username = '$username'";
+        mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }else{
+        return $_SESSION['alertReset'] = 'password lama anda salah';
+    }
+
+}
 
 function tambahAdmin($post){
     global $conn;

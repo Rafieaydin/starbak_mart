@@ -1,7 +1,7 @@
 <?php
 require '../koneksi.php';
 if (isset($_POST['submit'])) {
-    if (register($_POST) > 0) {
+    if (reset_password($_POST) > 0) {
         header('Location: login.php');
     }
 }
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Uprak PHP - Register</title>
+    <title>Uprak PHP - Change password</title>
 
     <!-- Custom fonts for this template-->
     <link href="../asset/pakage/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,46 +40,41 @@ if (isset($_POST['submit'])) {
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block bg-password-image"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Change password</h1>
 
                             </div>
-                            <?php if (isset($_SESSION['alertRegis'])) { ?>
+                            <?php if (isset($_SESSION['alertReset'])) { ?>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <?= $_SESSION['alertRegis'] ?>
+                                    <?= $_SESSION['alertReset'] ?>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <?php unset($_SESSION['alertRegis']) ?>
+                                    <?php unset($_SESSION['alertReset']) ?>
                                 </div>
                             <?php } ?>
                             <form class="user" method="POST">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="username" placeholder="username">
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" name="email" placeholder="Email Address">
+                                <div class="form-group ">
+                                    <input type="password" class="form-control form-control-user " id="password" name="password" placeholder="password">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user " id="password" name="password" placeholder="password">
-                                    </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user " id="password" name="password2" placeholder="ulangi password">
-                                    </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user " id="password" name="password_baru" placeholder="Masukan password baru anda">
                                 </div>
                                 <button type="submit" name="submit" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    Change password
                                 </button>
                                 <a href="../index.php" class="btn btn-success btn-user btn-block">back</a>
                                 <hr>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.php">Forgot Password?</a>
+                                <a class="small" href="register.php">Create an Account!</a>
                             </div>
                             <div class="text-center">
                                 <a class="small" href="login.php">Already have an account? Login!</a>

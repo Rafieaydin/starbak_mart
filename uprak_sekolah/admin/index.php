@@ -36,46 +36,7 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
     <div id="wrapper">
         <!-- sidebar -->
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-            </a>
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link " href="dashboard.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Admin
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link " href="index.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data Perusahaan</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-        </ul>
+        <?php include_once '../template/admin/sidebar.php' ?>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -85,56 +46,35 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
             <div id="content">
 
                 <!-- navbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3">Rafie aydin ihsan</span>
-                                <img class="img-profile rounded-circle" src="../asset/image/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../auth/logout.php" >
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+                <?php include_once '../template/admin/navbar.php' ?>
                 <!-- End of navbar -->
 
                 <!-- Begin Page Content -->
+
                 <div class="container-fluid">
                     <!-- DataTales Example -->
-                    <a href="tambah.php" class="btn btn-primary mb-3">Tambah Data</a>
+                    <?php if (isset($_SESSION['alert'])) { ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?= $_SESSION['alert'] ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <?php unset($_SESSION['alert']) ?>
+                        </div>
+                    <?php } ?>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data perusahaan</h6>
+                            <div class="row mt-2">
+                                <div class="col-md-10">
+                                    <h5 class="m-0 font-weight-bold text-primary ">Data perusahaan</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="tambah.php" class="btn btn-primary btn-sm pl-2">Tambah Data
+                                    </a>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -221,25 +161,26 @@ $perusahaan  = query("SELECT * FROM perusahaan ORDER BY id DESC");
     <script>
         $(document).ready(function() {
             $('#dataTable').DataTable();
-        })
 
-        $('.hapus').click(function() {
-            Swal.fire({
-                title: 'Apa anda yakin?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.value) {
-                    window.location.href = 'hapus.php?id="' + $(this).data('id') + '"';
-                    Swal.fire(
-                        'success',
-                        'Data anda berhasil di hapus.',
-                        'success'
-                    )
-                } else if (result.dismiss === Swal.DismissReason.cancel) {}
+            $('.hapus').click(function() {
+                Swal.fire({
+                    title: 'Apa anda yakin?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = 'hapus.php?id="' + $(this).data('id') + '"';
+                        Swal.fire(
+                            'success',
+                            'Data anda berhasil di hapus.',
+                            'success'
+                        )
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {}
+                })
             })
+
         })
     </script>
 </body>
